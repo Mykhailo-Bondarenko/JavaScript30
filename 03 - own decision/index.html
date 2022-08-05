@@ -23,9 +23,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     body {
       text-align: center;
@@ -46,8 +58,17 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('input');
 
+    function hundler() {
+      const unitOfMeasure = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + unitOfMeasure)
+    }
+
+    inputs.forEach(value => value.addEventListener('change', hundler));
+    inputs.forEach(value => value.addEventListener('mousemove', hundler));
   </script>
+
 
 </body>
 
